@@ -1,9 +1,4 @@
 <template>
-  <!--
-    TODO: Split into modules
-    TODO: Expand filter function
-    TODO: Nicer UI
-  -->
   <div id="main">
     Abbreviation greater than:
     <input v-model="abv_gt" @keydown="abvValidate" placeholder="Abbreviation greater than"/>
@@ -89,15 +84,16 @@ export default {
   font-size: 1em;
 }
 h1 {
-  font-size: 1.45em;
+  font-size: 1.8em;
 }
 h2 {
   margin-top: 10px;
-  font-size: 1.35em;
+  font-size: 1.6em;
 }
 h3 {
   margin-top: 5px;
-  font-size: 1.25em;
+  font-size: 1.2em;
+  font-style: italic;
 }
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
