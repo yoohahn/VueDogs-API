@@ -8,8 +8,9 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: DIST_FOLDER,
-    publicPath: PROD ? '' : '/dist/', //dist is only for dev
-    filename: PROD ? '[name].[chunkhash].js' : '[name].js'
+    publicPath: PROD ? '' : '/', // / is needed for dev to work
+    filename: PROD ? '[name].min.js?[chunkhash]' : '[name].js',
+    jsonpFunction: 'vueDogsApiJSONP'
   },
   module: {
     rules: [
@@ -42,7 +43,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: PROD ? '"production"' : '"development"'
-      }
+      },
+      __DEV__: !PROD
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -87,10 +89,6 @@ module.exports = {
 }
 
 if (PROD) {
-  module.exports.devServer = {
-    historyApiFallback: true,
-    noInfo: true
-  };
   module.exports.devtool = '#source-map'
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.optimize.UglifyJsPlugin({

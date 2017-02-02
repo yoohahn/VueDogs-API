@@ -11,12 +11,20 @@
 </template>
 
 <script>
-import api from "./helpers/api";
+import apiProd from "./helpers/api";
 import Beers from "./components/Beers.vue";
 import Loading from "./components/Loading.vue";
 import Error from "./components/Error.vue";
 
+let apiDev;
 let timer;
+
+if(__DEV__) {
+  //Will be removed in prod
+  apiDev = require("./helpers/api-dev").default;
+}
+
+const api = apiDev ? apiDev : apiProd;
 
 export default {
   name: 'app',
@@ -34,6 +42,16 @@ export default {
     }
   },
   methods: {
+    compileFilter: function() {
+      const arr = [];
+      if(this.abv_gt) {
+        arr.push(`${api.params.ABV_GREATER}=${this.abv_gt}`)
+      }
+      if(this.beer_name) {
+        arr.push(`${api.params.NAME}=${this.beer_name}`)
+      }
+      return arr.join("&");
+    },
     getBeerList: function _getBeerList() {
       clearTimeout(timer);
       timer = null;
@@ -61,9 +79,7 @@ export default {
       }
     },
     calcUrl: function _calc() {
-      const abv_gt = this.abv_gt.length > 0 ? `&${api.params.ABV_GREATER}=${this.abv_gt}` : "";
-      const beer_name = this.beer_name.length > 0 ? `&${api.params.NAME}=${this.beer_name}` : "";
-      return `${api.url}${abv_gt}${beer_name}`;
+      return `${api.url}&${this.compileFilter()}`;
     }
   },
   data () {
