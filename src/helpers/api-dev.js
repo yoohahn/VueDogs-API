@@ -342,8 +342,8 @@ let dummyArr = [
 ];
 
 export default {
-  url : 'https://api.punkapi.com/v2/beers?per_page=80',
-  params : {
+  url: 'https://api.punkapi.com/v2/beers?per_page=80',
+  params: {
     ABV_GREATER: 'abv_gt',
     ABV_LESS: 'abv_lt',
     NAME: 'beer_name',

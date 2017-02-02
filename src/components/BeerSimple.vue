@@ -55,6 +55,7 @@ export default {
   bottom: 0;
   left: 0;
   opacity: .2;
+  margin: 5px;
 
   background-position-x: center;
   background-position-y: center;

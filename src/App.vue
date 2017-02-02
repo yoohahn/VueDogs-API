@@ -112,6 +112,7 @@ h3 {
   font-style: italic;
 }
 body {
+  font-size: 100%;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,8 +1,11 @@
 <template>
-  <div class="beer_header" :style="{backgroundImage: 'url(' + logo +')'}">
-    <div clasS="beer_header-id">#{{id}}</div>
-    <div class="beer_header-name">{{name}}</div>
-    <div class="beer_header-date">First brewed {{convertDate()}}</div>
+  <div class="beer_header">
+    <div class="beer_header-img" :style="{backgroundImage: 'url(' + logo +')'}"></div>
+    <div class="beer_header-container">
+      <div class="beer_header-id">#{{id}}</div>
+      <div class="beer_header-name">{{name}}</div>
+      <div class="beer_header-date">First brewed {{convertDate()}}</div>
+    </div>
   </div>
 </template>
 
@@ -40,12 +43,23 @@ export default {
 
 <style>
 .beer_header {
+  position: relative;
+  height: 110px;
+}
+.beer_header-img {
   background-repeat: no-repeat;
   background-size: 90px;
-  padding-left: 100px;
   height: 110px;
-
+  width: 110px;
+  transform: rotate(350deg);
+  display: inline-block;
+  left: 10px;
   position: relative;
+}
+.beer_header-container {
+  left: 100px;
+  right: 0;
+  position: absolute;
 }
 .beer_header-id {
   font-weight: bold;

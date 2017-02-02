@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Beer from "./Beer.vue";
+import Beer from "./Beer/Beer.vue";
 import BeerSimple from "./BeerSimple.vue";
 
 export default {
