@@ -1,9 +1,9 @@
 <template>
   <div id="main">
     Abbreviation greater than:
-    <input v-model="abv_gt" @keydown="abvValidate" placeholder="Abbreviation greater than"/>
+    <input class="main-input" v-model="abv_gt" @keydown="abvValidate" placeholder="Abbreviation greater than"/>
     Name of the beer:
-    <input v-model="beer_name" placeholder="Name of the beer"/>
+    <input class="main-input" v-model="beer_name" placeholder="Name of the beer"/>
     <beers :list="beerList" v-if="!beerList.error"></beers>
     <error :msg="beerList" v-if="beerList.error"></error>
     <loading v-if="loading"></loading>
@@ -93,35 +93,11 @@ export default {
 }
 </script>
 
-<style>
-* {
-  margin: 0;
-  top: 0;
-  font-size: 1em;
-}
-h1 {
-  font-size: 1.8em;
-}
-h2 {
-  margin-top: 10px;
-  font-size: 1.6em;
-}
-h3 {
-  margin-top: 5px;
-  font-size: 1.2em;
-  font-style: italic;
-}
-body {
-  font-size: 100%;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-input {
+<style lang="scss">
+.main-input {
   width: 100%;
   border: 1px solid rgba(0,0,0,.1);
   border-radius: 4px;
-  margin: 0px;
   padding: 5px;
   box-sizing: border-box;
 }

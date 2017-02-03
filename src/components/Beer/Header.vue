@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .beer_header {
   position: relative;
   height: 110px;
@@ -59,6 +59,7 @@ export default {
 .beer_header-container {
   left: 100px;
   right: 0;
+  top: 0;
   position: absolute;
 }
 .beer_header-id {

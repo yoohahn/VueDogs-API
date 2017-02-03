@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .loading {
   position: relative;
   font-size: 2em;

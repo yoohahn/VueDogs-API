@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .error {
   position: relative;
   font-size: 1.2em;

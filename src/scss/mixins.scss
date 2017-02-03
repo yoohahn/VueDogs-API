@@ -1,0 +1,14 @@
+@mixin clear-mixin() {
+  margin: 0;
+  padding: 0;
+}
+@mixin default-font() {
+  font-family: 'Avenir', sans-serif;
+}
+@mixin fill-absolute() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

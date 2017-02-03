@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .beer-tagline {
   margin-top: 10px;
   margin-bottom: 10px;

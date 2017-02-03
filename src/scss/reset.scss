@@ -1,0 +1,50 @@
+@import "src/scss/mixins.scss";
+
+html {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 100%;
+  @include clear-mixin;
+  @include default-font;
+}
+
+h1 {
+  font-size: 1.8em;
+  @include clear-mixin;
+}
+
+h2 {
+  margin-top: 10px;
+  font-size: 1.6em;
+  @include clear-mixin;
+}
+
+h3 {
+  margin-top: 5px;
+  font-size: 1.2em;
+  font-style: italic;
+  @include clear-mixin;
+}
+
+button,
+input,
+select {
+  @include clear-mixin;
+  @include default-font;
+  font-size: 1em;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}

@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .beer_infobox-title {
   margin: 10px 0 0 0;
   padding: 0;

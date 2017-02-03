@@ -28,5 +28,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.beers_header {
+  margin-top: 10px;
+}
 </style>

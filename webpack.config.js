@@ -1,15 +1,27 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 var DIST_FOLDER = path.resolve(__dirname, './dist');
 var PROD = process.env.NODE_ENV === 'production';
+
+var sassStyleTagExtract = new ExtractTextPlugin({
+  filename: 'static/css/[name].css?[chunkhash]',
+  allChunks: true
+});
+
+var externalSassFilesExtract = new ExtractTextPlugin({
+  filename: 'static/css/reset.css?[chunkhash]',
+  allChunks: true
+});
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: DIST_FOLDER,
     publicPath: PROD ? '' : '/', // / is needed for dev to work
-    filename: PROD ? '[name].min.js?[chunkhash]' : '[name].js',
+    filename: PROD ? 'static/js/[name].min.js?[chunkhash]' : '[name].js',
     jsonpFunction: 'vueDogsApiJSONP'
   },
   module: {
@@ -19,11 +31,23 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+            scss: sassStyleTagExtract.extract({
+              loader: 'css-loader!postcss-loader!sass-loader',
+              fallbackLoader: 'vue-style-loader'
+            }),
+            sass: sassStyleTagExtract.extract({
+              loader: 'css-loader!postcss-loader!sass-loader?indentedSyntax',
+              fallbackLoader: 'vue-style-loader'
+            })
           }
           // other vue-loader options go here
         }
+      },
+      {
+        test: /\.scss$/,
+        use: externalSassFilesExtract.extract({
+          loader: 'css-loader!postcss-loader!sass-loader'
+        })
       },
       {
         test: /\.js$/,
@@ -34,12 +58,14 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: 'static/img/[name].[ext]?[hash]'
+          name: 'static/[name].[ext]?[hash:base64:5]'
         }
       }
     ]
   },
   plugins: [
+    sassStyleTagExtract,
+    externalSassFilesExtract,
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: PROD ? '"production"' : '"development"'
@@ -53,7 +79,7 @@ module.exports = {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: false
       },
       chunksSortMode: 'dependency'
     }),

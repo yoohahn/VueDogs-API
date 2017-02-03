@@ -1,8 +1,6 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
 import App from './App.vue';
-
-Vue.use(Vuex);
+import "./scss/reset.scss";
 
 new Vue({
   el: '#app',
