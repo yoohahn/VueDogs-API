@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="cssnext">
 .beers_header {
   margin-top: 10px;
 }

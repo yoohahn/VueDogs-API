@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="cssnext">
 .beer-simple {
   position: relative;
   border: 1px solid rgba(0,0,0,.3);

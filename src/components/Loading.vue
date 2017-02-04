@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="cssnext">
 .loading {
   position: relative;
   font-size: 2em;

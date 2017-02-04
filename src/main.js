@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
-import "./scss/reset.scss";
+import "./css/reset.css";
 
 new Vue({
   el: '#app',

@@ -1,4 +1,6 @@
-@import "src/scss/mixins.scss";
+:root {
+  --default-fonts: 'Avenir', sans-serif;
+}
 
 html {
   line-height: 1.15;
@@ -7,33 +9,52 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 100%;
-  @include clear-mixin;
-  @include default-font;
+
+  /* CLEAR */
+  margin: 0;
+  padding: 0;
+
+  /* FONT */
+  font-family: var(--default-fonts);
 }
 
 h1 {
   font-size: 1.8em;
-  @include clear-mixin;
+
+  /* CLEAR */
+  margin: 0;
+  padding: 0;
 }
 
 h2 {
   margin-top: 10px;
   font-size: 1.6em;
-  @include clear-mixin;
+
+  /* CLEAR */
+  margin: 0;
+  padding: 0;
 }
 
 h3 {
   margin-top: 5px;
   font-size: 1.2em;
   font-style: italic;
-  @include clear-mixin;
+
+  /* CLEAR */
+  margin: 0;
+  padding: 0;
 }
 
 button,
 input,
 select {
-  @include clear-mixin;
-  @include default-font;
+  /* CLEAR */
+  margin: 0;
+  padding: 0;
+
+  /* FONT */
+  font-family: var(--default-fonts);
+
   font-size: 1em;
   line-height: 1.15;
   text-transform: none;

@@ -93,7 +93,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="cssnext">
 .main-input {
   width: 100%;
   border: 1px solid rgba(0,0,0,.1);

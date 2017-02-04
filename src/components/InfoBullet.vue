@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="cssnext">
 .info-bullet__bold {
   font-weight: bold;
 }

@@ -6,12 +6,12 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var DIST_FOLDER = path.resolve(__dirname, './dist');
 var PROD = process.env.NODE_ENV === 'production';
 
-var sassStyleTagExtract = new ExtractTextPlugin({
+var cssStyleTagExtract = new ExtractTextPlugin({
   filename: 'static/css/[name].css?[chunkhash]',
   allChunks: true
 });
 
-var externalSassFilesExtract = new ExtractTextPlugin({
+var externalCssFilesExtract = new ExtractTextPlugin({
   filename: 'static/css/reset.css?[chunkhash]',
   allChunks: true
 });
@@ -31,12 +31,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            scss: sassStyleTagExtract.extract({
-              loader: 'css-loader!postcss-loader!sass-loader',
-              fallbackLoader: 'vue-style-loader'
-            }),
-            sass: sassStyleTagExtract.extract({
-              loader: 'css-loader!postcss-loader!sass-loader?indentedSyntax',
+            cssnext: cssStyleTagExtract.extract({
+              loader: 'css-loader?importLoaders=1!postcss-loader',
               fallbackLoader: 'vue-style-loader'
             })
           }
@@ -44,9 +40,9 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
-        use: externalSassFilesExtract.extract({
-          loader: 'css-loader!postcss-loader!sass-loader'
+        test: /\.css$/,
+        use: externalCssFilesExtract.extract({
+          loader: 'css-loader?importLoaders=1!postcss-loader'
         })
       },
       {
@@ -64,8 +60,8 @@ module.exports = {
     ]
   },
   plugins: [
-    sassStyleTagExtract,
-    externalSassFilesExtract,
+    cssStyleTagExtract,
+    externalCssFilesExtract,
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: PROD ? '"production"' : '"development"'
