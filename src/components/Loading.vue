@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style lang="cssnext">
+<style scoped>
 .loading {
   position: relative;
   font-size: 2em;

@@ -20,10 +20,12 @@ export default {
   },
   methods: {
     getInfoBullets: function(){
+      const descVal = this.beer.description.length > 123 ? this.beer.description.substring(0, 120) + '...' : this.beer.description;
       return [
         {key: 'Abv', value: this.beer.abv + '%'},
         {key: 'Og', value: this.beer.target_og},
-        {key: 'Fg', value: this.beer.target_fg}
+        {key: 'Fg', value: this.beer.target_fg},
+        {key: 'Desc', value: descVal}
       ];
     }
   },
@@ -36,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="cssnext">
+<style scoped>
 .beer-simple {
   position: relative;
   border: 1px solid rgba(0,0,0,.3);
@@ -71,6 +73,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
+  padding: 0 5px;
 }
 .beer-simple_header {
   margin-top: 5px;

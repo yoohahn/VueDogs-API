@@ -1,6 +1,7 @@
 <template>
   <div class="info-bullet">
-    <span class="info-bullet__bold info-bullet__indented" v-if="text.key">{{text.key}}: </span><span>{{text.value}}</span>
+    <span class="info-bullet__bold info-bullet__indented" v-if="text.key">{{text.key}}: </span>
+    <span class="info-bullet__text">{{text.value}}</span>
   </div>
 </template>
 
@@ -16,7 +17,7 @@ export default {
 }
 </script>
 
-<style lang="cssnext">
+<style scoped>
 .info-bullet__bold {
   font-weight: bold;
 }

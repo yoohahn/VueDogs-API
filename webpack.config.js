@@ -2,14 +2,24 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 
-var DIST_FOLDER = path.resolve(__dirname, './dist');
+var NODE_FOLDER = path.join(__dirname, 'node_modules');
+var DIST_FOLDER = path.join(__dirname, './dist');
+var SRC_FOLDER = path.join(__dirname, './src');
 var PROD = process.env.NODE_ENV === 'production';
 
 var cssStyleTagExtract = new ExtractTextPlugin({
   filename: 'static/css/[name].css?[chunkhash]',
   allChunks: true
 });
+
+var vueLoaders = PROD ? {
+    css: cssStyleTagExtract.extract({
+      loader: 'css-loader?importLoaders=1!postcss-loader',
+      fallbackLoader: 'vue-style-loader'
+    })
+  } : [];
 
 var externalCssFilesExtract = new ExtractTextPlugin({
   filename: 'static/css/reset.css?[chunkhash]',
@@ -30,12 +40,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          loaders: {
-            cssnext: cssStyleTagExtract.extract({
-              loader: 'css-loader?importLoaders=1!postcss-loader',
-              fallbackLoader: 'vue-style-loader'
-            })
-          }
+          loaders: vueLoaders
           // other vue-loader options go here
         }
       },
@@ -62,6 +67,10 @@ module.exports = {
   plugins: [
     cssStyleTagExtract,
     externalCssFilesExtract,
+    new CopyWebpackPlugin([{
+      from: path.join(NODE_FOLDER, 'punkapi-server/images/v2'),
+      to: path.join(DIST_FOLDER, 'images/v2')
+    }]),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: PROD ? '"production"' : '"development"'

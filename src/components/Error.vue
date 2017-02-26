@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style lang="cssnext">
+<style scoped>
 .error {
   position: relative;
   font-size: 1.2em;

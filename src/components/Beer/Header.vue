@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style lang="cssnext">
+<style scoped>
 .beer_header {
   position: relative;
   height: 110px;

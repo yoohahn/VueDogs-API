@@ -115,7 +115,7 @@ export default {
 }
 </script>
 
-<style lang="cssnext">
+<style scoped>
 .beer {
   padding: 10px;
 }
