@@ -5,7 +5,6 @@
   "author": "Johan Nilsson",
   "scripts": {
     "rimraf": "rimraf dist",
-    "dev": "npm run rimraf && cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
     "build": "npm run rimraf && cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
@@ -28,7 +27,6 @@
     "rimraf": "^2.5.4",
     "vue-loader": "^10.0.3",
     "vue-template-compiler": "^2.1.10",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.2.1"
+    "webpack": "^2.2.1"
   }
 }

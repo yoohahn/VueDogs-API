@@ -1,5 +1,5 @@
 export default {
-  url: 'api/v2/beers?1=1',
+  url: `api/v2/beers?_c=${+new Date()}`,
   params: {
     ABV_GREATER: 'abv_gt',
     ABV_LESS: 'abv_lt',
