@@ -1,19 +1,44 @@
 <template>
-  <div id="main">
-    Beer id:
-    <input class="filter-list__input" disabled="disabled" v-model="activeId"/>
-    Abbreviation less than:
-    <input class="filter-list__input" v-model="abv_lt" placeholder="Abbreviation less than"/>
-    Abbreviation greater than:
-    <input class="filter-list__input" v-model="abv_gt" placeholder="Abbreviation greater than"/>
-    Name of the beer:
-    <input class="filter-list__input" v-model="beer_name" placeholder="Name of the beer"/>
-    Hops:
-    <input class="filter-list__input" v-model="hops" placeholder="Name of the hops"/>
-    Malt:
-    <input class="filter-list__input" v-model="malt" placeholder="Name of the malt"/>
-    Yeast:
-    <input class="filter-list__input" v-model="yeast" placeholder="Name of the yeast"/>
+  <div>
+    <div class="flex-p top">
+      <div class="id">
+        Beer id: {{activeId || '-'}}
+      </div>
+      <button v-on:click="clearAll">Clear Filters</button>
+    </div>
+
+    <div class="flex-p">
+      <div class="flex-c">
+        Abbreviation greater than:
+        <input class="input" v-model="abv_gt" placeholder="Abbreviation greater than"/>
+      </div>
+      <div class="flex-c">
+        Abbreviation less than:
+        <input class="input" v-model="abv_lt" placeholder="Abbreviation less than"/>
+      </div>
+    </div>
+
+    <div class="flex-p">
+      <div class="flex-c">
+        Name of the beer:
+        <input class="input" v-model="beer_name" placeholder="Name of the beer"/>
+      </div>
+      <div class="flex-c">
+        Hops:
+        <input class="input" v-model="hops" placeholder="Name of the hops"/>
+      </div>
+    </div>
+
+    <div class="flex-p">
+      <div class="flex-c">
+        Malt:
+        <input class="input" v-model="malt" placeholder="Name of the malt"/>
+      </div>
+      <div class="flex-c">
+        Yeast:
+        <input class="input" v-model="yeast" placeholder="Name of the yeast"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,7 +59,9 @@ export default {
   },
   watch: {
     showBeer: function _showBeerFromStore() {
-      this.getBeerList( this.activeId );
+      this.getBeerList( {
+        id: this.activeId
+      } );
     },
     abv_lt: function _abv_lt() {
       this.getBeerList();
@@ -56,6 +83,17 @@ export default {
     }
   },
   methods: {
+    clearAll: function _clearAll(){
+      halt = true;
+      this.abv_gt = "";
+      this.abv_lt = "";
+      this.beer_name = "";
+      this.hops = "";
+      this.malt = "";
+      this.yeast = "";
+      this.$store.dispatch('setActiveId', null);
+      this.$store.dispatch('addResult', []);
+    },
     compileFilter: function( id ) {
       const arr = [];
       if(this.abv_gt) {
@@ -84,10 +122,15 @@ export default {
     calcUrl: function _calc( id ) {
       return `${api.url}&${this.compileFilter( id )}`;
     },
-    getBeerList: function _getBeerList( id ) {
+    getBeerList: function _getBeerList( obj = {} ) {
+      const { id } = obj;
       clearTimeout(timer);
       timer = null;
       timer = setTimeout(() => {
+        if(halt) {
+          halt = false;
+          return;
+        }
         if(this.calcUrl() === api.url){
           this.$store.dispatch('setLoadingState', false);
           return;
@@ -123,11 +166,34 @@ export default {
 </script>
 
 <style scoped>
-.filter-list__input {
+.id {
+  flex: 1 1 100%;
+}
+.flex-p.top {
+  margin: 0;
+  align-items: center;
+}
+button {
+  cursor: pointer;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 3px 6px;
+  background-color: #FFF;
+  flex: 0 0 120px;
+}
+.input {
   width: 100%;
   border: 1px solid rgba(0,0,0,.1);
   border-radius: 4px;
   padding: 5px;
+  box-sizing: border-box;
+}
+.flex-p {
+  display: flex;
+  margin: 10px 0;
+}
+.flex-c {
+  flex: 0 0 50%;
   box-sizing: border-box;
 }
 </style>

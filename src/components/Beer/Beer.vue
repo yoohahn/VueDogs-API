@@ -18,7 +18,7 @@
         <info-bullet :text="{key: '', value: beer.ingredients.yeast}"/>
       </beer-infobox>
 
-      <beer-infobox class="beer_infobox--content" id="beer-content-packaging" title="Packaging">
+      <beer-infobox class="beer_infobox--content beer_infobox--img" id="beer-content-packaging" title="Packaging">
         <img class="beer-content-packaging--img" :src="beer.image_url"/>
       </beer-infobox>
 
@@ -121,7 +121,7 @@ export default {
 }
 
 /*Beer packaging image overrides*/
-#beer-content-packaging .beer_infobox-slot {
+.beer_infobox--img {
   text-align: center;
 }
 .beer-content-packaging--img {
