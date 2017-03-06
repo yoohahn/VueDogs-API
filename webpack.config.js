@@ -14,12 +14,12 @@ var cssStyleTagExtract = new ExtractTextPlugin({
   allChunks: true
 });
 
-var vueLoaders = PROD ? {
-    css: cssStyleTagExtract.extract({
-      loader: 'css-loader?importLoaders=1!postcss-loader',
-      fallbackLoader: 'vue-style-loader'
-    })
-  } : [];
+var vueLoaders = {
+  css: cssStyleTagExtract.extract({
+    loader: 'css-loader?importLoaders=1!postcss-loader',
+    fallbackLoader: 'vue-style-loader'
+  })
+};
 
 var externalCssFilesExtract = new ExtractTextPlugin({
   filename: 'static/css/reset.css?[chunkhash]',
@@ -30,8 +30,8 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: DIST_FOLDER,
-    publicPath: PROD ? '' : '/', // / is needed for dev to work
-    filename: PROD ? 'static/js/[name].min.js?[chunkhash]' : '[name].js',
+    publicPath: '',
+    filename: 'static/js/[name].min.js?[chunkhash]',
     jsonpFunction: 'vueDogsApiJSONP'
   },
   module: {
@@ -73,9 +73,8 @@ module.exports = {
     }]),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: PROD ? '"production"' : '"development"'
-      },
-      __DEV__: !PROD
+        NODE_ENV: '"production"'
+      }
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',

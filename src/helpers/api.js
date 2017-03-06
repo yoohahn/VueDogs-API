@@ -6,10 +6,11 @@ export default {
     NAME: 'beer_name',
     HOPS: 'hops',
     MALT: 'malt',
-    YEAST: 'yeast'
+    YEAST: 'yeast',
+    IDS: 'ids'
   },
   fetch: url => {
-    return fetch( url )
+    return fetch( url.replace(/\s/gi, "_").replace(/,/gi, "|") )
       .then( result => {
         return result.json();
       } );

@@ -1,5 +1,5 @@
 <template>
-  <div class="beer-simple">
+  <div class="beer-simple" title="Click for more details" v-on:click="show">
     <div class="beer-simple_bg-img" :style="{ backgroundImage: 'url(' + beer.image_url + ')' }"></div>
     <div class="beer-simple_info">
       <h2 class="beer-simple_header" :title="beer.name">
@@ -19,6 +19,9 @@ export default {
     InfoBullet,
   },
   methods: {
+    show: function(){
+      this.$store.dispatch('showBeer', this.beer.id);
+    },
     getInfoBullets: function(){
       const descVal = this.beer.description.length > 123 ? this.beer.description.substring(0, 120) + '...' : this.beer.description;
       return [
@@ -48,6 +51,7 @@ export default {
   height: 198px;
   margin: 10px 5px;
   overflow: hidden;
+  cursor: pointer;
 }
 .beer-simple_bg-img {
   z-index: 0;
