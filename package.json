@@ -5,7 +5,8 @@
   "author": "Johan Nilsson",
   "scripts": {
     "rimraf": "rimraf dist",
-    "build": "npm run rimraf && cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "npm run rimraf && cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "start": "node server"
   },
   "dependencies": {
     "punkapi-server": "git://github.com/yoohahn/punkapi-server.git",
