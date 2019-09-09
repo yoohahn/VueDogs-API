@@ -1,14 +1,19 @@
-FROM node:7-alpine
+FROM node:12-alpine as build
 
 RUN mkdir -p /www
 WORKDIR /www
 
 COPY . ./
 
-RUN npm install
+RUN apk update && apk upgrade && apk add --no-cache bash git openssh
+RUN yarn install
 RUN npm run build
-RUN npm prune --production
+RUN rm -rf src
 
-EXPOSE "3333"
+FROM node:12-alpine
+WORKDIR /www
+
+EXPOSE 3333
+COPY --from=build /www /www
 
 CMD ["npm", "start"]
