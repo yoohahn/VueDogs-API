@@ -12,13 +12,8 @@ $ docker pull yoohahn/brewdog-recipe
 ## Build local
 
 ```bash
-# install dependencies
 $ yarn install
-
-# build for production with minification
 $ yarn build
-
-# serve with hot reload at localhost:3333
 $ yarn start
 ```
 
