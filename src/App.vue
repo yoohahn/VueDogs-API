@@ -12,23 +12,23 @@ import FilterList from "./components/Filter/List.vue";
 import Beers from "./components/Beers.vue";
 import Loading from "./components/Loading.vue";
 import Error from "./components/Error.vue";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'app',
+  name: "app",
   computed: {
     ...mapGetters({
-      loading: 'loading',
-      beerList: 'beerList'
-    }),
+      loading: "loading",
+      beerList: "beerList"
+    })
   },
   components: {
     Beers,
     Loading,
     Error,
-    FilterList,
+    FilterList
   }
-}
+};
 </script>
 
 <style scoped>
